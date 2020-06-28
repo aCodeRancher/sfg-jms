@@ -47,9 +47,8 @@ public class HelloSender {
                 .message("Hello")
                 .build();
 
-        Message receviedMsg = jmsTemplate.sendAndReceive(JmsConfig.MY_SEND_RCV_QUEUE, new MessageCreator() {
-            @Override
-            public Message createMessage(Session session) throws JMSException {
+        Message receviedMsg = jmsTemplate.sendAndReceive(JmsConfig.MY_SEND_RCV_QUEUE,  session -> {
+
                 Message helloMessage = null;
 
                 try {
@@ -63,7 +62,7 @@ public class HelloSender {
                 } catch (JsonProcessingException e) {
                    throw new JMSException("boom");
                 }
-            }
+
         });
 
         System.out.println(receviedMsg.getBody(String.class));
