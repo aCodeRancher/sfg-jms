@@ -25,7 +25,7 @@ public class HelloMessageListener {
 
     @JmsListener(destination = JmsConfig.MY_QUEUE)
     public void listen(@Payload HelloWorldMessage helloWorldMessage,
-                       @Headers MessageHeaders headers, Message message){
+                       @Headers MessageHeaders headers, Message message) throws JMSException{
 
         //System.out.println("I Got a Message!!!!!");
 
@@ -34,6 +34,8 @@ public class HelloMessageListener {
 
         // uncomment and view to see retry count in debugger
        // throw new RuntimeException("foo");
+       HelloWorldMessage message1 = (HelloWorldMessage) jmsTemplate.receiveAndConvert(JmsConfig.MY_QUEUE);
+       System.out.println("My queue receives : " + message1.getMessage());
 
     }
 
@@ -44,7 +46,7 @@ public class HelloMessageListener {
         HelloWorldMessage payloadMsg = HelloWorldMessage
                 .builder()
                 .id(UUID.randomUUID())
-                .message("World!!")
+                .message( helloWorldMessage.getMessage() +" World!!")
                 .build();
 
         jmsTemplate.convertAndSend(message.getJMSReplyTo(), payloadMsg);

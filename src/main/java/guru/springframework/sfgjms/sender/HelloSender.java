@@ -44,7 +44,7 @@ public class HelloSender {
         HelloWorldMessage message = HelloWorldMessage
                 .builder()
                 .id(UUID.randomUUID())
-                .message("Hello")
+                .message("Hola")
                 .build();
 
         Message receviedMsg = jmsTemplate.sendAndReceive(JmsConfig.MY_SEND_RCV_QUEUE,  session -> {
