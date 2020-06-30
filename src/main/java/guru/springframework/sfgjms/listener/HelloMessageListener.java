@@ -10,6 +10,7 @@ import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import java.util.UUID;
@@ -45,11 +46,11 @@ public class HelloMessageListener {
         HelloWorldMessage payloadMsg = HelloWorldMessage
                 .builder()
                 .id(UUID.randomUUID())
-                .message("World!!")
+                .message( helloWorldMessage.getMessage() +" World!!")
                 .build();
 
         //example to use Spring Message type
-       // jmsTemplate.convertAndSend((Destination) springMessage.getHeaders().get("jms_replyTo"), "got it!");
+      // jmsTemplate.convertAndSend((Destination) springMessage.getHeaders().get("jms_replyTo"), payloadMsg.getMessage() + " in spring message");
 
         jmsTemplate.convertAndSend(jmsMessage.getJMSReplyTo(), payloadMsg);
 
