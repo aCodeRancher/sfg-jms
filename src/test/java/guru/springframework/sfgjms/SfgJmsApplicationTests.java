@@ -55,7 +55,7 @@ public class SfgJmsApplicationTests {
 
 		});
 
-		assertTrue((receivedMessage.getBody(String.class).contains("test World!!")));
+		 assertTrue(receivedMessage.getBody(String.class).contains("test World!!"));
 
 	}
 
@@ -85,7 +85,7 @@ public class SfgJmsApplicationTests {
 
 		});
 
-		assertTrue(receviedMsg.getBody(String.class).contains("\"Hello World!! in spring message\""));
+		assertTrue(receviedMsg.getBody(String.class).contains("\"Hello World!!\""));
 
 	}
 
